@@ -10,7 +10,7 @@ $(document).ready(function (){
 
 
 function displayError() {
-  $("div#errors").html("I'm sorry for some of the things said, hope you are too")
+  $("div#errors").html("I'm sorry but I couldn't retreive data");
 }
 
 function searchRepositories() {
