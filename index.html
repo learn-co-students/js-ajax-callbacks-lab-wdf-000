@@ -22,18 +22,62 @@
     <main id="main">
       <div id="errors"></div>
     </main>
+
+    <div>
+      <label for="searchTerms"></label>
+      <input type="search" name="searchTerms" value="" id="searchTerms">
+      <a href="#" id="searchLink">Search</a>
+    </div>
+
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
-        <div id="results"></div>
+        <div id="results">
+        </div>
       </div>
       <div>
         <h3>Details</h3>
-        <div id="details"></div>
+        <div id="details">
+        </div>
       </div>
     </div>
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
+
+    <!-- handlebar templates -->
+    <script id="repo-template" type="text/x-handlebars-template" charset="utf-8">
+      {{#each items}} 
+      <div>
+        <img src="{{owner.avatar_url}}" width="42"/></br>
+        <h3>Owner: {{ owner.login }}</h3>
+        <a href="{{{owner.html_url}}}" target="_blank">User Profile</a> <br />
+        Repo name: {{ full_name }} <br />
+        Repo description: {{ description }} <br />
+        Repo link: <a href="{{html_url}}">Clik Here</a><br />
+        <a href="{{commits_url}}" id="commits">Show Commits</a>
+        <hr />
+      </div>
+      {{/each}}
+    </script>
+
+    <script id="commits-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <div>
+          <p>{{ sha }}</p>
+          <p>{{ commit.author.name }}</p>
+          <p>{{ author.login }}</p>
+          {{> userDetails author }}
+        </div>
+      {{/each}}
+    </script>
+
+    <script id="user-details-partial" type="text/x-handlebars-template" charset="utf-8">
+			<!-- Reusable partial for user info -->
+      <div class="details">
+        <img src="{{avatar_url}}" width="42"/>
+        <p><a href="{{url}}">{{login}}</a></p>
+      </div>
+    </script>
   </body>
 </html>
