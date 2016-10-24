@@ -68,7 +68,7 @@ describe('index.js', () => {
         expect(window.$('#results').html()).toMatch(/Tetris/)
       })
     })
-// 
+//
 //     describe('showCommits', () => {
 //       it('calls the github commits api and displays results', () => {
 //         const el = { dataset: { repository: "repo", owner: "owner" } }
@@ -78,8 +78,8 @@ describe('index.js', () => {
 //         expect(window.$('#details').html()).toMatch(/6dcb09b5b57875f334f61aebed695e2e4193db5e/)
 //       })
 //     })
-//   })
-// })
+  })
+})
 
 const contentType = { "Content-Type": "application/json" }
 
