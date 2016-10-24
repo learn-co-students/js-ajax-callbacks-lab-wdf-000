@@ -16,11 +16,17 @@
       .flexbox-container > div:first-child {
         margin-right: 20px;
       }
+      .format {
+        height: 50px;
+        width: 50px;
+      }
     </style>
   </head>
   <body>
     <main id="main">
       <div id="errors"></div>
+      <input type="text" id="searchTerms">
+      <a href="#" id="search">Search Repositories</a>
     </main>
     <div class="flexbox-container">
       <div>
@@ -35,5 +41,27 @@
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
+    <script id="repos-template" type="text/x-handlebars-template">
+      {{#each items}}
+        <h4>{{ name }}</h4>
+        <p>Description: {{ description }}</p>
+        <p>Link: <a href="{{ html_url }}">{{ name }}</a></p>
+        <p><a href="{{ commits_url }}" id="commits">Show Commits</a></p>
+        {{> userDetails owner }}
+      {{/each}}
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <p>{{ sha }}</p>
+        <p>{{ commit.author.name }}</p>
+        <p>{{ author.login }}</p>
+        {{> userDetails author }}
+      {{/each}}
+    </script>
+    <script id="user-details-partial" type="text/x-handlebars-template">
+      User: <a href="{{ url }}">{{ login }}</a>
+      <br>
+      <img src="{{ avatar_url }}" class="format">
+    </script>
   </body>
 </html>
