@@ -19,6 +19,16 @@ function showCommits() {
   });
 }
 
+function getCommits(url) {
+ $.get(url, function(response) {
+   let template = $('#commits-template').html();
+   let templateScript = Handlebars.compile(template);
+   let html = templateScript(response);
+   $('#details').append(html);
+ })
+		.fail(displayError);
+}
+
 function searchRepositories() {
   let input = $('#searchTerms').val();
   let searchTerms = input.split(' ').join('+');
@@ -28,16 +38,6 @@ function searchRepositories() {
     let template = Handlebars.compile($("#repo-template").html());
     $('#results').html(template(response));
   })
-		.fail(displayError);
-}
-
-function getCommits(url) {
- $.get(url, function(response) {
-   let template = $('#commits-template').html();
-   let templateScript = Handlebars.compile(template);
-   let html = templateScript(response);
-   $('#details').append(html);
- })
 		.fail(displayError);
 }
 
