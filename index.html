@@ -21,7 +21,17 @@
   <body>
     <main id="main">
       <div id="errors"></div>
+
     </main>
+
+    <div class="searchTerms">
+        <input type="text" id="searchTerms">
+    </div>
+
+     <div class="search">
+        <a href="#" id="search">Search Repositories</a>
+    </div>
+
     <div class="flexbox-container">
       <div>
         <h3>Repositories</h3>
@@ -35,5 +45,39 @@
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
+    <!-- handlebar templates -->
+    <script id="results-template" type="text/x-handlebars-template">
+      {{#each items}}
+      <div class="owner">
+  <p>Repository name: <strong>{{name}}</strong></p>
+  <p>Description: <strong>{{description}}</strong></p>
+        <p>Language: <strong>{{language}}</strong></p>
+        <ul>
+  <li><a href="{{html_url}}" target="_blank">Repository Page</a></li>
+  <li><a href="#" data-repository="{{name}}" data-owner="{{owner.login}}" id="commits" onclick="showCommits(this)">Show Commits</a></li>
+        </ul>
+        {{> userDetails owner}}
+      </div>
+      {{/each}}
+    </script>
+
+  <script id="commits-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="commits">
+      <p>{{ sha }}</p>
+      <p>{{ commit.author.name }}</p>
+      <p>{{ author.login }}</p>
+
+      {{> userDetails author}}
+    </div>
+    {{/each}}
+  </script>
+  
+  <script id="user-details-partial" type="text/x-handlebars-template">
+    <div class="details">
+      <img width="32px" height="32px" src="{{avatar_url}}">
+      <p><a href="{{html_url}}">{{login}}</a></p>
+    </div>
+  </script>
   </body>
 </html>
