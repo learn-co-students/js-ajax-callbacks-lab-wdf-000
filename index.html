@@ -54,7 +54,7 @@
         <p>Language: <strong>{{language}}</strong></p>
         <ul>
   <li><a href="{{html_url}}" target="_blank">Repository Page</a></li>
-          <li><a href="{{commits_url}}" id="commits">Show Commits</a></li>
+  <li><a href="#" data-repository="{{name}}" data-owner="{{owner.login}}" id="commits" onclick="showCommits(this)">Show Commits</a></li>
         </ul>
         {{> userDetails owner}}
       </div>
