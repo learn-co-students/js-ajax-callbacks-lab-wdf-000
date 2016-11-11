@@ -20,6 +20,9 @@
   </head>
   <body>
     <main id="main">
+      <input type="text" id="searchTerms">
+      <br>
+      <a href="#">Search</a>
       <div id="errors"></div>
     </main>
     <div class="flexbox-container">
@@ -35,5 +38,11 @@
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
+
+    <script id="user-details-partial" type="text/x-handlebars-template">
+      <div>
+        My name is {{name}}. I am a {{occupation}}.
+      </div>
+    </script>
   </body>
 </html>
