@@ -16,14 +16,25 @@
       .flexbox-container > div:first-child {
         margin-right: 20px;
       }
+      img {
+        height: 50px;
+        width: 50px;
+      }
+      .details {
+        display: flex;
+        justify-content: space-around;
+      }
     </style>
   </head>
   <body>
     <main id="main">
-      <input type="text" id="searchTerms">
-      <br>
-      <a href="#">Search</a>
       <div id="errors"></div>
+    <div class="searchTerms">
+      <input type="text" name="terms" id="searchTerms">
+    </div>
+    <div class="search">
+      <a href="#" id="search">Search Repositories</a>
+    </div>
     </main>
     <div class="flexbox-container">
       <div>
@@ -38,10 +49,33 @@
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
-
+    <script id="results-template" type="text/x-handlebars-template">
+      {{#each items}}
+        <div style="border: 1px solid black;">
+          <p>{{ name }}</p>
+          <p>{{ description }}</p>
+          <ul>
+            <li><a href="{{ html_url }}">{{ html_url }}</a></li>
+            <li><a href="{{commits_url}}" id="commits">Show Commits</a></li>
+          </ul>
+          {{> userDetails owner }}
+        </div>
+      {{/each}}
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <div style="border: 1px solid black;">
+          <p>{{ sha }}</p>
+          <p>{{ commit.author.name }}</p>
+          <p>{{ author.login }}</p>
+          {{> userDetails author }}
+        </div>
+      {{/each}}
+    </script>
     <script id="user-details-partial" type="text/x-handlebars-template">
-      <div>
-        My name is {{name}}. I am a {{occupation}}.
+      <div class="details">
+        <img src="{{avatar_url}}">
+        <p><a href="{{url}}">{{login}}</a></p>
       </div>
     </script>
   </body>
