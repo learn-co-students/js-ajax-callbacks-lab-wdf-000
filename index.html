@@ -22,18 +22,41 @@
     <main id="main">
       <div id="errors"></div>
     </main>
+    <input type="text" id="searchTerms" />
+    <a href="#" id="search">Search Repositories</a>
     <div class="flexbox-container">
-      <div>
-        <h3>Repositories</h3>
-        <div id="results"></div>
-      </div>
-      <div>
-        <h3>Details</h3>
-        <div id="details"></div>
-      </div>
+        <div>
+          <h3>Repositories</h3>
+          <div id="results"></div>
+        </div>
+        <div>
+          <h3>Details</h3>
+          <div id="details"></div>
+        </div>
     </div>
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
+    <script id="results-template" type="text/x-handlebars-template">
+      {{#each items}}
+      <h2>Name: <a href="{{ html_url }}">{{name}}</a></h2>
+      <a href="#" class="commits" data-repository="{{name}}" data-owner="{{owner.login}}">Show Commits</a>
+      <p>{{description}}</p>
+      <div>{{> userDetails owner }}</div>
+      <hr>
+      {{/each}}
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <h3>{{ sha }}</h3>
+        <p> {{ commit.message }} </p>
+        <div> {{> userDetails author }} </div>
+      {{/each}}
+    </script>
+
+    <script id="user-details-partial" type="text/x-handlebars-template">
+      <h4><a href="{{ url }}">{{ login }}</a></h4>
+      <img width="32px" height="32px" src="{{ avatar_url }}">
+    </script>
   </body>
 </html>
