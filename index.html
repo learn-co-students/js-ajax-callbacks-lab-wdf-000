@@ -21,6 +21,8 @@
   <body>
     <main id="main">
       <div id="errors"></div>
+      <input type="text" id="searchTerms">
+      <a href="#" id="search">Search Repositories</a>
     </main>
     <div class="flexbox-container">
       <div>
@@ -35,5 +37,34 @@
     <script src="jquery-3.1.0.min.js"></script>
     <script src="handlebars.js"></script>
     <script src="index.js"></script>
+    <script id="results-template" type="text/x-handlebars-template">
+      {{#each items}}
+      <div>
+        <p>{{name}}</p>
+        <p>{{description}}</p>
+        <ul>
+          <li><a href="{{html_url}}">Repo</a></li>
+          <li><a href="{{commits_url}}">Commits</a></li>
+        </ul>
+        {{> userDetails owner}}
+      </div>
+      {{/each}}
+    </script>
+    <script id="commits-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <div>
+        <p>{{sha}}</p>
+        <p>{{commit.author.name}}</p>
+        <p>{{author.login}}</p>
+        {{> userDetails author}}
+      </div>
+      {{/each}}
+    </script>
+    <script id="user-details-partial" type="text/x-handlebars-template">
+      <div class="details">
+        <img src="{{avatar_url}}">
+        <a href="{{url}}">{{login}}</a>
+      </div>
+    </script>
   </body>
 </html>
